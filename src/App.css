@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap');
 :root{
   --bg-color: #41434E;
+  --bg-color-secondary: #1C1D21;
   --primary-color: #45f3ff;
   --text-color: #fff;
 }
@@ -52,13 +53,40 @@ body{
   display: inline-block;
   margin: 5px;
 }
-.tv-shows_container{
+.tv-shows li .content-list{
+  position: relative;
   min-width: 250px;
   min-height: 350px;
   width: 100%;
   height: 100%;
   max-width: 250px;
   max-height: 350px;
+}
+.tv-shows li .content-list div.front,.tv-shows li div.back{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  transition: .5s ease-in-out;
+}
+
+.tv-shows li .content-list div.front{
+  transform: perspective(500px) rotateY(0deg);
+}
+.tv-shows li .content-list div.back{
+  transform: perspective(500px) rotateY(180deg);
+}
+.tv-shows li .content-list:hover div.front{
+  transform: perspective(500px) rotateY(180deg);
+}
+.tv-shows li .content-list:hover div.back{
+  transform: perspective(500px) rotateY(360deg);
+}
+
+.tv-shows_container{
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -69,7 +97,8 @@ body{
   border-radius: 10px;
   border: 1px solid var(--primary-color);
 }
-.tv-shows_container::before{
+
+.tv-shows_container_content::before{
   content: '';
   position: absolute;
   top: -50%;
@@ -83,7 +112,7 @@ body{
   transition: 0.3s ease;
   visibility: hidden;
 }
-.tv-shows_container::after{
+.tv-shows_container_content::after{
   content: '';
   position: absolute;
   top: -50%;
@@ -99,20 +128,26 @@ body{
   visibility: hidden;
 }
 
-.tv-shows_container:hover .tv-shows_container_content{
-  transform: translateY(0%);
-}
-.tv-shows_container:hover::before, .tv-shows_container:hover::after{
+.tv-shows li .content-list:hover .tv-shows_container_content::before, 
+.tv-shows li .content-list:hover .tv-shows_container_content::after{
   visibility: visible;
 }
+
 .tv-shows_container_content{ 
-  background: var(--bg-color);
-  transition: 0.3s ease-in-out;
-  transform: translateY(100%);
+  position: relative;
+  overflow: hidden;
+  z-index: 9999;
+  cursor: pointer;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+}
+.tv-shows_container_content div{ 
+  background: var(--bg-color-secondary);
   inset: 4px;
   position: absolute;
   border-radius: 10px;
 }
+
 .tv-shows_container_content ul.details-show{
   padding: 10px;
   margin: 0;
@@ -135,6 +170,7 @@ body{
   margin: 0;
   padding: 0 10px;
 }
+
 .pagination{
   padding: 30px;
 }

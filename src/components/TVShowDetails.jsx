@@ -5,6 +5,7 @@ function TVShowDetails(props) {
     const { data, loading, error } = useFetch("https://www.episodate.com/api/show-details?q="+props.showId);
     return (
       <>
+      <div>
         {error && <li>Error: {error}</li>}
         {loading ? <li>Loading...</li> :
         (
@@ -28,6 +29,7 @@ function TVShowDetails(props) {
         </ul>
         )
         }
+    </div>
       </>
     )
 }

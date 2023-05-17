@@ -34,9 +34,11 @@ function TVShowList() {
           {loading ? <li>Loading... <img className="loader" src={loader} /></li> :
           data.tv_shows?.map((show) => (
             <li key={show.id}>
-              <div className='tv-shows_container' style={{backgroundImage: `url(${show.image_thumbnail_path})`}}>
-                <div className="tv-shows_container_content">
-                  <TVShowDetails showId={show.id} />
+              <div className="content-list">
+                <div className='tv-shows_container front' style={{backgroundImage: `url(${show.image_thumbnail_path})`}}>
+                </div>
+                <div className="tv-shows_container_content back">
+                    <TVShowDetails showId={show.id} />
                 </div>
               </div>
             </li>
